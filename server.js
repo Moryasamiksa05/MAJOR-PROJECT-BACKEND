@@ -2,10 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const admin = require("./firebaseAdmin"); // Firebase Admin SDK
-const User = require("./models/User"); // Correct path to your User model
+const user = require("./models/user"); // Correct path to your User model
 
 dotenv.config(); // Load environment variables
 
