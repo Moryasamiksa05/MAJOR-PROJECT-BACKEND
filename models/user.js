@@ -6,5 +6,5 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
 });
 
-// ✅ Fix OverwriteModelError — check before defining
+// Fix OverwriteModelError — check before defining
 module.exports = mongoose.models.User || mongoose.model("User", userSchema);

@@ -25,7 +25,7 @@ router.post("/:bookingId/feedback", verifyToken, async (req, res) => {
     console.log("Booking User ID:", booking.userId.toString());
     console.log("Logged-in User ID:", userId);
 
-    // ✅ Create a new feedback entry in the Feedback model
+    // Create a new feedback entry in the Feedback model
     const newFeedback = new Feedback({
       bookingId: booking._id,
       rating,
@@ -36,7 +36,7 @@ router.post("/:bookingId/feedback", verifyToken, async (req, res) => {
 
     res.status(201).json({ message: "Feedback submitted successfully", newFeedback });
   } catch (err) {
-    console.error("❌ Feedback submission error:", err);
+    console.error(" Feedback submission error:", err);
     res.status(500).json({ message: "Server error" });
   }
 });

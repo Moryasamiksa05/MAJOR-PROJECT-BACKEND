@@ -20,5 +20,5 @@ const verifyAdmin = (req, res, next) => {
   }
 };
 
-// ✅ Exporting the middleware function
+// Exporting the middleware function
 module.exports = verifyAdmin;

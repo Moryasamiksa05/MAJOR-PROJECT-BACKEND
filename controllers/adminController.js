@@ -134,7 +134,7 @@ exports.updateBookingStatus = async (req, res) => {
 
         res.json({ message: `${statusType} status updated successfully`, booking });
     } catch (err) {
-        console.error("❌ Status Update Error:", err.message);
+        console.error(" Status Update Error:", err.message);
         res.status(500).json({ message: "Failed to update status" });
     }
 };
@@ -164,7 +164,7 @@ exports.getAllBookings = async (req, res) => {
 
         res.json({ success: true, bookings: formattedBookings });
     } catch (err) {
-        console.error("❌ Get All Bookings Error:", err.message);
+        console.error(" Get All Bookings Error:", err.message);
         res.status(500).json({ message: "Failed to fetch bookings" });
     }
 };

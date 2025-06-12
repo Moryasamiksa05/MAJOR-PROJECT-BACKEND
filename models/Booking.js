@@ -21,7 +21,7 @@ const bookingSchema = new mongoose.Schema({
   },
   
 
-  // ✅ Add this 👇
+  // ✅ Add this 
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
