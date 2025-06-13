@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const admin = require("./firebaseAdmin"); // Firebase Admin SDK
-const User = require("./models/user");
+const User = require("./models/User");
  // Correct path to your User model
 
 dotenv.config(); // Load environment variables
@@ -37,14 +37,14 @@ mongoose
 app.post("/register", async (req, res) => {
   const { email, phone, password } = req.body;
   try {
-    let existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: "User already exists" });
+    let user = await User.findOne({ email });
+    if (user) return res.status(400).json({ message: "User already exists" });
 
     const firebaseUser = await admin.auth().createUser({ email, password });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ email, phone, password: hashedPassword });
-    await newUser.save();
+    user = new User({ email, phone, password: hashedPassword });
+    await user.save();
 
     res.status(201).json({ message: "User registered successfully", firebaseUser });
   } catch (error) {
@@ -52,7 +52,6 @@ app.post("/register", async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 });
-
 
 // 🔐 User Login (JWT Token)
 app.post("/login", async (req, res) => {
@@ -72,6 +71,9 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+
+
 
 // 🔄 Forgot Password (Firebase)
 app.post("/forgot-password", async (req, res) => {
