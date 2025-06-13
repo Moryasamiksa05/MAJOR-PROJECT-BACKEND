@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const admin = require("./firebaseAdmin"); // Firebase Admin SDK
 const User = require("./models/user.js");
+console.log(" User model loaded in server.js");
  // Correct path to your User model
 
 dotenv.config(); // Load environment variables
