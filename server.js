@@ -33,18 +33,18 @@ mongoose
 
 // ================= Firebase + MongoDB Auth Routes =================
 
-// 🔐 User Registration (Firebase + MongoDB)
+// User Registration (Firebase + MongoDB)
 app.post("/register", async (req, res) => {
   const { email, phone, password } = req.body;
   try {
-    let user = await User.findOne({ email });
-    if (user) return res.status(400).json({ message: "User already exists" });
+    let existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(400).json({ message: "User already exists" });
 
     const firebaseUser = await admin.auth().createUser({ email, password });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    user = new User({ email, phone, password: hashedPassword });
-    await user.save();
+    const newUser = new User({ email, phone, password: hashedPassword });
+    await newUser.save();
 
     res.status(201).json({ message: "User registered successfully", firebaseUser });
   } catch (error) {
@@ -52,6 +52,7 @@ app.post("/register", async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 });
+
 
 // 🔐 User Login (JWT Token)
 app.post("/login", async (req, res) => {
